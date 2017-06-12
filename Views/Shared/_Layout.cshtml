@@ -1,4 +1,4 @@
-﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,6 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -32,19 +31,23 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Product" asp-action="List">Product</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - WebApplication7</p>
-        </footer>
+    <div class="navbar navbar-inverse" role="navigation">
+        <a class="navbar-brand" href="#">SPORTS STORE</a>
+    </div>
+    <div class="row panel">
+        <div id="categories" class="col-xs-3">
+            @await Component.InvokeAsync("NavigationMenu")
+        </div>
+        <div class="col-xs-8">
+            @RenderBody()
+        </div>
     </div>
 
     <environment names="Development">
