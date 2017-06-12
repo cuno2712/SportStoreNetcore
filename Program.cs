@@ -16,7 +16,7 @@ namespace WebApplication7
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
+		.UseUrls("http://104.156.239.252:5002/")
                 .Build();
 
             host.Run();
