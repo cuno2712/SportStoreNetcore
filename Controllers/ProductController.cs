@@ -29,7 +29,7 @@ namespace WebApplication7.Controllers
                 {
                     CurrentPage =  page,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Products.Count()
+                    TotalItems = string.IsNullOrEmpty(category) ? repository.Products.Count() : repository.Products.Where(x=>x.Category==category).Count()
                 },
                 CurrentCategory = category
             });
