@@ -17,7 +17,7 @@ namespace WebApplication7.Components
         
         public IViewComponentResult Invoke()
         {
-            List<string> a = repository.Products.Select(x => x.Category).Distinct().OrderBy(x => x).ToList();
+            ViewBag.SelectedCategory = RouteData?.Values["category"];
 
             return View(repository.Products
             .Select(x => x.Category)
