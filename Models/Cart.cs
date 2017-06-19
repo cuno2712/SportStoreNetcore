@@ -7,8 +7,7 @@ namespace WebApplication7.Models
 {
     public class Cart
     {
-        public class CartLine
-        {
+        
             private List<CartLine> lineCollection =new List<CartLine>();
             public virtual void AddItem(Product product,int quantity)
             {
@@ -34,6 +33,10 @@ namespace WebApplication7.Models
             {
                 return lineCollection.Sum(x=> x.Quantity * x.Product.Price );
             }
+        public virtual void Clear() => lineCollection.Clear();
+        public virtual IEnumerable<CartLine> Lines => lineCollection;
+        public class CartLine
+        {
             public int CartLineID { get; set; }
             public Product Product { get; set; }
             public int Quantity { get; set; }
