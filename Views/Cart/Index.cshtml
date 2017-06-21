@@ -16,6 +16,9 @@
             <th class="text-right">
                 Subtotal
             </th>
+            <th class="text-right">
+                
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +29,13 @@
                 <td class="text-left">@line.Product.Name</td>
                 <td class="text-right">@line.Product.Price.ToString("c")</td>
                 <td class="text-right">@((line.Quantity*line.Product.Price).ToString("c"))</td>
+                <td>
+                    <form  asp-controller="Cart" asp-action="RemoveFromCart" method="post">
+                        <input type="hidden" name="ProductID" value="@line.Product.ProductId"/>
+                        <input type="hidden" name="returnUrl" value="@Model.returnUrl" />
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                    </form>
+                </td>
             </tr>
 
         }

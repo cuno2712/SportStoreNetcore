@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebApplication7.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+
 namespace WebApplication7
 {
     public class Startup
@@ -35,6 +37,8 @@ namespace WebApplication7
             var b = Configuration["Data:BaselineConnection:ConnectionString"];
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:ConnectionString"]));
             services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
