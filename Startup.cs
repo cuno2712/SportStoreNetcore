@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using WebApplication7.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace WebApplication7
 {
@@ -50,7 +52,7 @@ namespace WebApplication7
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
-            app.UseStaticFiles();
+            app.UseStaticFiles();            
             app.UseSession();
             app.UseMvc(routes => {
                 routes.MapRoute(

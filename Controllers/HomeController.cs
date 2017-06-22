@@ -9,6 +9,11 @@ namespace WebApplication7.Controllers
 {
     public class HomeController : Controller
     {
+        private IProductRepository repository;
+        public HomeController(IProductRepository repo)
+        {
+            repository = repo;
+        }
         public IActionResult Index()
         {            
             return View();
@@ -18,7 +23,7 @@ namespace WebApplication7.Controllers
         {
             ViewData["Message"] = "Your application description page.";
 
-            return View();
+            return View(repository.StackInfos);
         }
 
         public IActionResult Contact()

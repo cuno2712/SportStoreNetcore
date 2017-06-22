@@ -9,6 +9,7 @@ namespace WebApplication7.Models
         public interface IProductRepository
         {
             IEnumerable<Product> Products { get; }
-        }
+        IEnumerable<StackInfo> StackInfos { get; }
+    }
    
 }

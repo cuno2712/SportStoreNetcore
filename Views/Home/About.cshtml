@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<StackInfo>
+@{
     ViewData["Title"] = "About";
 }
 <h2>@ViewData["Title"].</h2>
@@ -9,3 +10,10 @@ I will create an online product catalog that customers can browse by category an
 where users can add and remove products, and a checkout where customers can enter their shipping details.
 I will also create an administration area that includes create, read, update, and delete (CRUD) facilities for
 managing the catalog, and I will protect it so that only logged-in administrators can make changes.</p>
+<b>Stack Use</b>
+<br />
+@foreach(var item in Model)
+{
+    <p>@item.StackName: @item.Version</p>
+
+}

@@ -13,6 +13,7 @@ namespace WebApplication7.Models
             context = ctx;
         }
         public IEnumerable<Product> Products => context.Products;
+        public IEnumerable<StackInfo> StackInfos => context.StackInfos;
 
     }
 }
