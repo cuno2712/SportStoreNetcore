@@ -15,6 +15,10 @@ namespace WebApplication7.Models
         {
             get;set;
         }
+        public DbSet<Order> Orders
+        {
+            get; set;
+        }
         public DbSet<StackInfo> StackInfos
         {
             get; set;

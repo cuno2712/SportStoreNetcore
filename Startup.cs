@@ -37,8 +37,12 @@ namespace WebApplication7
 
             var a = Configuration["Data:SportStoreProducts:ConnectionString"];
             var b = Configuration["Data:BaselineConnection:ConnectionString"];
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:ConnectionString"]));
+            //Mysql
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:ConnectionString"]));
+            //MSSQL
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:MSSQLConnectionString"]));
             services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
