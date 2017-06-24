@@ -22,7 +22,7 @@ namespace WebApplication7.Controllers
             return View(new Order());
         }
         [HttpPost]
-        public IActionResult Checkout(Order order)
+        public IActionResult CheckOut(Order order)
         {
             if (cart.Lines.Count() == 0)
             {
