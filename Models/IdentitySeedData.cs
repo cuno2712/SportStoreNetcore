@@ -19,7 +19,7 @@ namespace WebApplication7.Models
             IdentityUser user = await userManager.FindByIdAsync(adminUser);
             if(user == null)
             {
-                user = new IdentityUser(adminUser);
+                user = new IdentityUser("Admin");
                 await userManager.CreateAsync(user, adminPassword);
             }
         }
