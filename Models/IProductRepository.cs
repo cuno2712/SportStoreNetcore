@@ -10,6 +10,9 @@ namespace WebApplication7.Models
         {
             IEnumerable<Product> Products { get; }
         IEnumerable<StackInfo> StackInfos { get; }
+        void SaveProduct(Product product);
+        Product DeleteProduct(int productId);
+        
     }
    
 }

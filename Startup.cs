@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace WebApplication7
 {
@@ -34,13 +35,13 @@ namespace WebApplication7
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-
-            var a = Configuration["Data:SportStoreProducts:ConnectionString"];
-            var b = Configuration["Data:BaselineConnection:ConnectionString"];
+      
             //Mysql
-            //services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:ConnectionString"]));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:MSSQLConnectionString"]));
             //MSSQL
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:MSSQLConnectionString"]));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
@@ -48,6 +49,7 @@ namespace WebApplication7
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
+            
 
         }
 
@@ -83,6 +85,8 @@ namespace WebApplication7
 
 
             SeedData.EnsurePopulated(app);
+            app.UseIdentity();
+            IdentitySeedData.EnsurePopulated(app);
 
         }
     }

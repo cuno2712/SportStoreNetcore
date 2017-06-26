@@ -14,6 +14,8 @@ namespace WebApplication7.Models
         public int OrderID { get; set; }
         [BindNever]
         public ICollection<Cart.CartLine> Lines { get; set; }
+        [BindNever]
+        public bool Shipped { get; set; }
         [Required(ErrorMessage =@"Nhập tên")]
         public string Name { get; set; }
         [Required(ErrorMessage = @"Nhập địa chỉ thứ 1")]

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication7.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication7.Controllers
 {
@@ -41,6 +42,21 @@ namespace WebApplication7.Controllers
         {
             cart.Clear();
             return View();
+        }
+        [Authorize]
+        public ViewResult List() => View(repository.Orders.Where(x => !x.Shipped));
+        [HttpPost]
+        [Authorize]
+        public IActionResult MarkShipped(int orderID)
+        {
+            Order order = repository.Orders.FirstOrDefault(x=>x.OrderID==orderID);
+            if(order != null)
+            {
+                order.Shipped = true;
+                repository.SaveOrder(order);
+            }
+            return RedirectToAction(nameof(List));
+
         }
     }
 }
