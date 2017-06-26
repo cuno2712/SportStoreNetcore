@@ -38,8 +38,10 @@ namespace WebApplication7
 
             //MSSQL
             //services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:MSSQLConnectionString"]));
+            //services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:MSSQLConnectionString"]));
             //MySQL
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));            
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddTransient<IOrderRepository, EFOrderRepository>();
