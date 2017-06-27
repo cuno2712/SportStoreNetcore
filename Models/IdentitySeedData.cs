@@ -12,7 +12,7 @@ namespace WebApplication7.Models
     public class IdentitySeedData
     {
         private const string adminUser = "Admin";
-        private const string adminPassword = "123456789";
+        private const string adminPassword = "T@n537198";
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
             UserManager<IdentityUser> userManager = app.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
