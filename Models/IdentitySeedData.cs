@@ -12,15 +12,22 @@ namespace WebApplication7.Models
     public class IdentitySeedData
     {
         private const string adminUser = "Admin";
-        private const string adminPassword = "123456789";
+        private const string adminPassword = "T@n537198";
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
-            UserManager<IdentityUser> userManager = app.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
-            IdentityUser user = await userManager.FindByIdAsync(adminUser);
+            UserManager<ApplicationUser> userManager = app.ApplicationServices.GetRequiredService<UserManager<ApplicationUser>>();
+            ApplicationUser user = await userManager.FindByIdAsync(adminUser);
             if(user == null)
             {
-                user = new IdentityUser("Admin");
-                await userManager.CreateAsync(user, adminPassword);
+                user = new ApplicationUser { UserName=adminUser};
+                var result = await userManager.CreateAsync(user, adminPassword);
+                if (result.Succeeded)
+                    Console.WriteLine("Create user" + adminUser + "successfully");
+                else
+                {
+                    Console.WriteLine(result.Errors.ToString());
+
+                }                
             }
         }
     }

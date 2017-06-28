@@ -37,12 +37,15 @@ namespace WebApplication7
             // Add framework services.
 
             //MSSQL
-            //services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:MSSQLConnectionString"]));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:MSSQLConnectionString"]));
             //services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:MSSQLConnectionString"]));
             //MySQL
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));
-            services.AddDbContext<AppIdentityDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));
+            //services.AddDbContext<AppIdentityDbContext>(options => options.UseMySQL(Configuration["Data:SportStoreProducts:MySQLConnectionString"]));
+            //Postgres
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration["Data:SportStoreProducts:PostgresSQLConnectionString"]));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseNpgsql(Configuration["Data:SportStoreProducts:PostgresSQLConnectionString"]));
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
@@ -68,6 +71,7 @@ namespace WebApplication7
             }
             app.UseStaticFiles();            
             app.UseSession();
+            app.UseIdentity();
             app.UseMvc(routes => {
                 routes.MapRoute(name: "Error", template: "Error",
 defaults: new { controller = "Error", action = "Error" });
@@ -92,10 +96,18 @@ defaults: new { controller = "Error", action = "Error" });
                 defaults: new { controller = "Product", action = "List", page = 1 });
                 routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                LoginPath = new PathString("/Login"),
+                LogoutPath = new PathString("/Logout")
+            });
 
-
+            
+            
             SeedData.EnsurePopulated(app);
-            app.UseIdentity();
+            
             IdentitySeedData.EnsurePopulated(app);
 
         }

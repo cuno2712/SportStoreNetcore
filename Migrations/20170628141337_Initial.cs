@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebApplication7.Migrations
 {
-    public partial class Orders : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace WebApplication7.Migrations
                 columns: table => new
                 {
                     OrderID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     City = table.Column<string>(nullable: false),
                     Country = table.Column<string>(nullable: false),
                     GiftWrap = table.Column<bool>(nullable: false),
@@ -22,6 +22,7 @@ namespace WebApplication7.Migrations
                     Line2 = table.Column<string>(nullable: true),
                     Line3 = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: false),
+                    Shipped = table.Column<bool>(nullable: false),
                     State = table.Column<string>(nullable: false),
                     Zip = table.Column<string>(nullable: true)
                 },
@@ -35,11 +36,11 @@ namespace WebApplication7.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Category = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Category = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
                     InStock = table.Column<bool>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -64,7 +65,7 @@ namespace WebApplication7.Migrations
                 columns: table => new
                 {
                     CartLineID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     OrderID = table.Column<int>(nullable: true),
                     ProductId = table.Column<int>(nullable: true),
                     Quantity = table.Column<int>(nullable: false)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,6 +38,7 @@ namespace WebApplication7.Models
         public virtual IEnumerable<CartLine> Lines => lineCollection;
         public class CartLine
         {
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             public int CartLineID { get; set; }
             public Product Product { get; set; }
             public int Quantity { get; set; }

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication7.Models
 {
     public class Order
     {
         [BindNever]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderID { get; set; }
         [BindNever]
         public ICollection<Cart.CartLine> Lines { get; set; }

@@ -8,19 +8,20 @@ using WebApplication7.Models;
 namespace WebApplication7.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170623154701_Orders")]
-    partial class Orders
+    [Migration("20170628141337_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.2")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
+                .HasAnnotation("ProductVersion", "1.1.2");
 
             modelBuilder.Entity("WebApplication7.Models.Cart+CartLine", b =>
                 {
                     b.Property<int>("CartLineID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
                     b.Property<int?>("OrderID");
 
@@ -40,7 +41,8 @@ namespace WebApplication7.Migrations
             modelBuilder.Entity("WebApplication7.Models.Order", b =>
                 {
                     b.Property<int>("OrderID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
                     b.Property<string>("City")
                         .IsRequired();
@@ -60,6 +62,8 @@ namespace WebApplication7.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<bool>("Shipped");
+
                     b.Property<string>("State")
                         .IsRequired();
 
@@ -73,15 +77,19 @@ namespace WebApplication7.Migrations
             modelBuilder.Entity("WebApplication7.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
-                    b.Property<string>("Category");
+                    b.Property<string>("Category")
+                        .IsRequired();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
                     b.Property<bool?>("InStock");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
