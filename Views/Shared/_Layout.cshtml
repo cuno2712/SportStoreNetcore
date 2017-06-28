@@ -37,14 +37,17 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Product" asp-action="List">Product</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>                    
                 </ul>
+                  <div class="nav navbar-btn"   >
+                <a class="btn btn- btn-primary pull-left" asp-action="Login" asp-controller="Account">Login</a>
+                      </div>
             </div>
         </div>
     </nav>
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">SPORTS STORE</a>
-        <div class="pull-right">@await Component.InvokeAsync("CartSummary")</div>
+        <div class="pull-right">@await Component.InvokeAsync("CartSummary")</div>       
     </div>
     <div class="row panel">
         <div id="categories" class="col-xs-3">
