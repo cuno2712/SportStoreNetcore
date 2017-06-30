@@ -31,5 +31,8 @@ namespace WebApplication7.Models
         [Required(ErrorMessage = @"Nhập Country")]
         public string Country { get; set; }
         public bool GiftWrap { get; set; }
+        [EmailAddress]
+        [Required(ErrorMessage = @"Email")]
+        public string Email { get; set; }
     }
 }

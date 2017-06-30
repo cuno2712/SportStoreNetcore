@@ -16,6 +16,8 @@
     <Content Include=".\wwwroot\css\styles.css" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FluentEmail.Mailgun" Version="2.1.0" />
+    <PackageReference Include="FluentEmail.Razor" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="1.1.2" />
