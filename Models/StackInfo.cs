@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication7.Models
 {
@@ -11,6 +6,7 @@ namespace WebApplication7.Models
     {
         [Key]
         public string StackName { get; set; }
+
         public string Version { get; set; }
     }
 }
